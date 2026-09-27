@@ -51,7 +51,7 @@ export const PageDownloadIde: React.FC<PageDownloadIdeProps> = ({ onNavigate }) 
             Download RocketIDE
           </h2>
           <p className="text-xs text-neutral-400 mt-1">
-            RocketIDE 1.0.0 for Windows x64. Includes the .NET runtime and native debugger.
+            RocketIDE 1.0.0 for Windows x64. The installer and Portable ZIP include the .NET runtime and native debugger.
           </p>
         </div>
 
@@ -156,8 +156,8 @@ export const PageDownloadIde: React.FC<PageDownloadIdeProps> = ({ onNavigate }) 
       </div>
 
       <div className="p-4 bg-neutral-950 border border-neutral-800 rounded-xl space-y-3 text-sm text-neutral-300">
-        <p>Extract the complete ZIP, then open <code>RocketIDE.exe</code> inside the extracted folder. Keep all included files together.</p>
-        <p>Download the Windows Rocket SDK separately. In Tools &gt; Rocket SDK Settings, select its <code>bin/rocketc.exe</code> and <code>bin/rocket-lsp.exe</code>.</p>
+        <p>Run the Windows installer for a guided per-user setup, or choose the Portable ZIP to extract and open <code>RocketIDE.exe</code>. Keep every file in the portable folder together.</p>
+        <p>The Rocket SDK is separate. Install it yourself, then configure it in Tools &gt; Rocket SDK Settings.</p>
         <p>RocketIDE uses Windows WPF. Linux and macOS users can download the Rocket language SDK below and use their preferred editor.</p>
       </div>
 

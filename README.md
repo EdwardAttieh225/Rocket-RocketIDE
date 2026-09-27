@@ -6,10 +6,10 @@ The published website is [ryaneid06.github.io/Rocket-RocketIDE](https://ryaneid0
 
 The [published release](https://github.com/RyanEid06/Rocket-RocketIDE/releases/tag/v3.0.0) provides:
 
-- RocketIDE 1.0.0: Windows x64 portable ZIP, including the .NET runtime and native debugger. Extract the entire folder and open RocketIDE.exe. There is no installer wizard.
+- RocketIDE 1.0.0: Windows x64 installer, including the .NET runtime and native debugger. The standard wizard offers an install folder, Start menu and optional desktop shortcuts, launch on Finish, and normal uninstall support. The separately labeled Portable ZIP remains available.
 - Rocket 3.0.0 SDK: Windows x64, Linux x64, Linux ARM64 and macOS Apple Silicon ARM64. There is no Intel macOS SDK or Linux/macOS RocketIDE package in this release.
 
-Packages are hosted as GitHub Release assets, not inside the website source. The Windows compiler is named rocketc.exe; other platforms use rocketc. Package filenames, sizes, SHA-256 hashes and URLs are recorded in [public/downloads.json](public/downloads.json); page display data is in [src/data/rocketData.ts](src/data/rocketData.ts). Update both together if a later release is explicitly approved.
+Packages are hosted as GitHub Release assets, not inside the website source. The Windows compiler is named rocketc.exe; other platforms use rocketc. Package filenames, sizes, SHA-256 hashes and URLs are recorded in [public/downloads.json](public/downloads.json); page display data is in [src/data/rocketData.ts](src/data/rocketData.ts). RocketIDE does not bundle the Rocket SDK; configure it separately through Tools > Rocket SDK Settings.
 
 The separate [RocketIDE repository](https://github.com/RyanEid06/RocketIDE) uses main for development and consumer for its minimal distribution. Frozen executable downloads and checksums are unchanged by repository cleanup.
 

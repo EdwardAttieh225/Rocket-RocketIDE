@@ -175,8 +175,20 @@ export const getDownloadUrl = (filename: string): string => {
 
 export const RELEASE_ASSETS: ReleaseAsset[] = [
   {
+    "id": "ide-win-installer",
+    "name": "RocketIDE 1.0.0 Windows Installer",
+    "filename": "RocketIDE-Setup-1.0.0.exe",
+    "platform": "windows",
+    "architecture": "windows-x64",
+    "size": "88.5 MiB",
+    "sha256": "edcf2fa265f5663b2420286ca8b62b14d8e98f1af62927272d8d2ce02e59e8b1",
+    "type": "installer",
+    "description": "Install RocketIDE with the Windows wizard. It follows system light/dark mode and offers folder choice, shortcuts, and launch after setup. The Rocket SDK is separate.",
+    "recommended": true
+  },
+  {
     "id": "ide-win-zip",
-    "name": "RocketIDE 1.0.0 Portable",
+    "name": "RocketIDE 1.0.0 Portable ZIP",
     "filename": "RocketIDE-win-x64-1.0.0.zip",
     "platform": "windows",
     "architecture": "windows-x64",
@@ -184,7 +196,7 @@ export const RELEASE_ASSETS: ReleaseAsset[] = [
     "sha256": "a5e1966a322ec19e391a775ef1909fec32a51b36b3869215a0117fc24fcb174c",
     "type": "portable",
     "description": "Extract the complete archive and open RocketIDE.exe. Includes the .NET runtime and debugger. Download the Rocket SDK separately.",
-    "recommended": true
+    "recommended": false
   },
   {
     "id": "cli-windows-x64",
