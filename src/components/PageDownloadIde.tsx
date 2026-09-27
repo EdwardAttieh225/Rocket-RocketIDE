@@ -1,26 +1,19 @@
 import React, { useState } from 'react';
 import { RELEASE_ASSETS, getDownloadUrl, GITHUB_RELEASES_URL } from '../data/rocketData';
 import { 
-  Download, Copy, Check, ShieldCheck, Monitor, 
-  ArrowLeft, ArrowRight, Terminal, Laptop, ExternalLink
+  Download, Copy, Check, ArrowLeft, ArrowRight, ExternalLink
 } from 'lucide-react';
 import { AppPage } from '../App';
 
 interface PageDownloadIdeProps {
   onNavigate: (page: AppPage) => void;
 }
-
-type PlatformFilter = 'all' | 'windows' | 'linux' | 'macos';
-
 export const PageDownloadIde: React.FC<PageDownloadIdeProps> = ({ onNavigate }) => {
-  const [selectedPlatform, setSelectedPlatform] = useState<PlatformFilter>('all');
   const [copiedHash, setCopiedHash] = useState<string | null>(null);
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
   const ideAssets = RELEASE_ASSETS.filter(a => a.id.startsWith('ide'));
-  const filteredAssets = selectedPlatform === 'all'
-    ? ideAssets
-    : ideAssets.filter(a => a.platform === selectedPlatform);
+  const filteredAssets = ideAssets;
 
   const handleCopyHash = (hash: string, id: string) => {
     navigator.clipboard.writeText(hash);
@@ -30,15 +23,7 @@ export const PageDownloadIde: React.FC<PageDownloadIdeProps> = ({ onNavigate }) 
 
   const handleInitiateDownload = (asset: typeof ideAssets[0]) => {
     setDownloadingId(asset.id);
-    const directUrl = getDownloadUrl(asset.filename);
-
-    // Direct browser navigation to start the genuine binary download from GitHub Releases
-    const a = document.createElement('a');
-    a.href = directUrl;
-    a.setAttribute('download', asset.filename);
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    // The anchor performs the download; this handler only shows feedback.
 
     setTimeout(() => {
       setDownloadingId(null);
@@ -66,53 +51,10 @@ export const PageDownloadIde: React.FC<PageDownloadIdeProps> = ({ onNavigate }) 
             Download RocketIDE
           </h2>
           <p className="text-xs text-neutral-400 mt-1">
-            Official developer environment for Windows, Linux, and macOS.
+            RocketIDE 1.0.0 for Windows x64. Includes the .NET runtime and native debugger.
           </p>
         </div>
 
-        {/* Platform Selector Tabs */}
-        <div className="flex items-center gap-1.5 p-1 bg-neutral-900 border border-neutral-800 rounded-lg self-start sm:self-auto text-xs">
-          <button
-            onClick={() => setSelectedPlatform('all')}
-            className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
-              selectedPlatform === 'all'
-                ? 'bg-neutral-800 text-white font-semibold shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            All OS
-          </button>
-          <button
-            onClick={() => setSelectedPlatform('windows')}
-            className={`px-3 py-1.5 rounded-md font-medium transition-colors flex items-center gap-1.5 ${
-              selectedPlatform === 'windows'
-                ? 'bg-neutral-800 text-white font-semibold shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            <span>Windows</span>
-          </button>
-          <button
-            onClick={() => setSelectedPlatform('linux')}
-            className={`px-3 py-1.5 rounded-md font-medium transition-colors flex items-center gap-1.5 ${
-              selectedPlatform === 'linux'
-                ? 'bg-neutral-800 text-white font-semibold shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            <span>Linux</span>
-          </button>
-          <button
-            onClick={() => setSelectedPlatform('macos')}
-            className={`px-3 py-1.5 rounded-md font-medium transition-colors flex items-center gap-1.5 ${
-              selectedPlatform === 'macos'
-                ? 'bg-neutral-800 text-white font-semibold shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            <span>macOS</span>
-          </button>
-        </div>
       </div>
 
       {/* Main Download Options Grid */}
@@ -213,35 +155,10 @@ export const PageDownloadIde: React.FC<PageDownloadIdeProps> = ({ onNavigate }) 
         })}
       </div>
 
-      {/* Operating System Compatibility Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-        <div className="p-4 bg-neutral-950 border border-neutral-800 rounded-lg">
-          <div className="text-neutral-500 uppercase text-[10px] font-bold">WINDOWS</div>
-          <div className="text-white font-semibold mt-1">Windows 10 / 11 (x64)</div>
-          <div className="text-neutral-400 text-[11px] mt-1">WPF Native + DbgEng</div>
-        </div>
-        <div className="p-4 bg-neutral-950 border border-neutral-800 rounded-lg">
-          <div className="text-neutral-500 uppercase text-[10px] font-bold">LINUX</div>
-          <div className="text-white font-semibold mt-1">Ubuntu / Fedora / Arch (x64)</div>
-          <div className="text-neutral-400 text-[11px] mt-1">AppImage &amp; GDB Engine</div>
-        </div>
-        <div className="p-4 bg-neutral-950 border border-neutral-800 rounded-lg">
-          <div className="text-neutral-500 uppercase text-[10px] font-bold">MACOS</div>
-          <div className="text-white font-semibold mt-1">macOS 12+ (Universal)</div>
-          <div className="text-neutral-400 text-[11px] mt-1">Apple Silicon M1-M4 &amp; Intel</div>
-        </div>
-      </div>
-
-      {/* Quick Launch Guide */}
-      <div className="p-4 bg-neutral-950 border border-neutral-800 rounded-xl space-y-2 text-xs">
-        <div className="text-neutral-400 font-semibold flex items-center gap-2">
-          <Terminal className="w-3.5 h-3.5 text-orange-400" />
-          <span>Quick Install via Terminal:</span>
-        </div>
-        <div className="font-mono-code text-[11px] text-neutral-300 bg-neutral-900/80 p-2.5 rounded-lg border border-neutral-800">
-          <div><span className="text-neutral-500"># Linux:</span> chmod +x RocketIDE-x86_64.AppImage &amp;&amp; ./RocketIDE-x86_64.AppImage</div>
-          <div className="mt-1"><span className="text-neutral-500"># macOS:</span> hdiutil attach RocketIDE-Universal.dmg &amp;&amp; cp -R /Volumes/RocketIDE/RocketIDE.app /Applications</div>
-        </div>
+      <div className="p-4 bg-neutral-950 border border-neutral-800 rounded-xl space-y-3 text-sm text-neutral-300">
+        <p>Extract the complete ZIP, then open <code>RocketIDE.exe</code> inside the extracted folder. Keep all included files together.</p>
+        <p>Download the Windows Rocket SDK separately. In Tools &gt; Rocket SDK Settings, select its <code>bin/rocketc.exe</code> and <code>bin/rocket-lsp.exe</code>.</p>
+        <p>RocketIDE uses Windows WPF. Linux and macOS users can download the Rocket language SDK below and use their preferred editor.</p>
       </div>
 
       {/* Next steps link */}

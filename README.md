@@ -1,35 +1,13 @@
-# Rocket & RocketIDE — Official Website
+# Rocket & RocketIDE website
 
-The official web portal and release distribution platform for the **Rocket** systems programming language and its companion desktop studio, **RocketIDE**.
+Published at https://ryaneid06.github.io/Rocket-RocketIDE/ using GitHub Pages.
 
-Built with React 19, TypeScript, Vite, and Tailwind CSS. Configured for zero-config automatic deployment to GitHub Pages.
+Downloads are GitHub Release assets from the saved v3.0.0 release:
+- RocketIDE 1.0.0: Windows x64 portable ZIP, including RocketIDE.exe and its runtime/debugger files.
+- Rocket 3.0.0 SDK: Windows x64, Linux x64, Linux ARM64, and macOS Apple Silicon ARM64.
 
----
+There are no Linux/macOS RocketIDE packages or Intel macOS SDK in this release. All downloads include real SHA-256 hashes in public/downloads.json and the release SHA256SUMS.txt. Rocket's compiler is named rocketc.exe on Windows and rocketc on POSIX systems.
 
-## 🚀 Overview
+Use Node.js 24 and npm. Run npm ci --legacy-peer-deps, npm run lint, and npm run build. The main branch deploys through .github/workflows/deploy.yml. Download URLs and display metadata live in src/data/rocketData.ts.
 
-- **Interactive Browser Studio**: An in-browser interactive simulator of RocketIDE with real code files (`fibonacci.rocket`, `test.rocket`, `language_tour.rocket`, `concurrency.rocket`), live compiling feedback, output panes, and AST diagnostics.
-- **Bare-Metal Benchmark**: Side-by-side performance race demonstrating Rocket's LLVM `-O2` register optimization against standard Python bytecode execution on a 1,000,000-iteration loop.
-- **Multi-Platform Distribution Matrix**: Direct download packages, SHA-256 checksums, and terminal installation commands for:
-  - **Windows**: Windows Installer (`.exe`), Standalone Portable (`.zip`), and SDK toolchain.
-  - **Linux**: AppImage (`.AppImage`), Standalone Tarball (`.tar.gz`), and compiler CLI.
-  - **macOS**: Universal Disk Image (`.dmg`), Installer Package (`.pkg`), and Homebrew formulas.
-- **Clean Aesthetic**: Obsidian dark theme, responsive navigation, zero AI-slop design, and complete legal licensing information.
-
----
-
-## 🛠️ Getting Started
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- `npm` or `bun`
-
-### Installation
-
-Clone the repository and install dependencies:
-
-```bash
-git clone https://github.com/USERNAME/REPO.git
-cd REPO
-npm install
+The SDK transfer workflow verifies native CI run 36304020122 at Rocket commit 1f6ba76f16f3246095d5d573c28d825d8b9367e3 before attaching its existing packages to the draft. Published downloads are independently fetched and hashed by the verification workflow.

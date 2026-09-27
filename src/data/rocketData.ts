@@ -174,128 +174,64 @@ export const getDownloadUrl = (filename: string): string => {
 };
 
 export const RELEASE_ASSETS: ReleaseAsset[] = [
-  // Windows
   {
-    id: 'ide-win-exe',
-    name: 'RocketIDE Windows Installer',
-    filename: 'RocketIDE-Setup.exe',
-    platform: 'windows',
-    architecture: 'Windows x64 (.NET 10 WPF)',
-    size: '86.4 MB',
-    sha256: '9f83a42b10e5d9c7482a170fb98c39e1e2478fa9b36021d7b693fa71630c12e8',
-    type: 'installer',
-    description: 'Native Windows desktop installer. Features AvalonEdit editor, Microsoft DbgEng native debugger, and LSP integration.',
-    recommended: true
+    "id": "ide-win-zip",
+    "name": "RocketIDE 1.0.0 Portable",
+    "filename": "RocketIDE-win-x64-1.0.0.zip",
+    "platform": "windows",
+    "architecture": "windows-x64",
+    "size": "132.0 MiB",
+    "sha256": "a5e1966a322ec19e391a775ef1909fec32a51b36b3869215a0117fc24fcb174c",
+    "type": "portable",
+    "description": "Extract the complete archive and open RocketIDE.exe. Includes the .NET runtime and debugger. Download the Rocket SDK separately.",
+    "recommended": true
   },
   {
-    id: 'ide-win-zip',
-    name: 'RocketIDE Standalone Portable (Windows)',
-    filename: 'RocketIDE-Portable-win-x64.zip',
-    platform: 'windows',
-    architecture: 'Windows x64',
-    size: '81.2 MB',
-    sha256: '2a77f98e0c4b31a29f848cde91f09ab5672d1134a413c6b20f1883624e5d8091',
-    type: 'portable',
-    description: 'Standalone portable archive. Unpack and launch RocketIDE directly without system registration.',
-    recommended: false
-  },
-  // Linux
-  {
-    id: 'ide-linux-appimage',
-    name: 'RocketIDE Linux AppImage',
-    filename: 'RocketIDE-x86_64.AppImage',
-    platform: 'linux',
-    architecture: 'Linux x86_64',
-    size: '84.2 MB',
-    sha256: '3819fa0018b2c4180bbfa71008129074a8109cb3401928374a108bcf19028374',
-    type: 'installer',
-    description: 'Self-contained executable for Ubuntu, Fedora, Debian, Arch, and major Linux distributions.',
-    recommended: true
+    "id": "cli-windows-x64",
+    "name": "Rocket 3.0.0 SDK (windows-x64)",
+    "filename": "rocket-3.0.0-windows-x64.zip",
+    "platform": "windows",
+    "architecture": "windows-x64",
+    "size": "319.1 MiB",
+    "sha256": "42bae12625717a776dac358d9177a01d8dd91762d4e6ed91384fc46d34e45de7",
+    "type": "toolchain",
+    "description": "Native compiler (rocketc), language server, standard library, and toolchain. Extract the complete SDK; follow PACKAGE.md for setup.",
+    "recommended": true
   },
   {
-    id: 'ide-linux-tar',
-    name: 'RocketIDE Standalone Archive (Linux)',
-    filename: 'rocketide-linux-x64.tar.gz',
-    platform: 'linux',
-    architecture: 'Linux x86_64',
-    size: '82.1 MB',
-    sha256: '71009182374bbfa710018b2c4180bbfa71008129074a8109cb3401928374a108',
-    type: 'portable',
-    description: 'Precompiled binary archive with desktop shortcuts and launcher script.',
-    recommended: false
-  },
-  // macOS
-  {
-    id: 'ide-mac-dmg',
-    name: 'RocketIDE macOS Disk Image',
-    filename: 'RocketIDE-Universal.dmg',
-    platform: 'macos',
-    architecture: 'Apple Silicon (M-Series) & Intel x64',
-    size: '88.5 MB',
-    sha256: '8b7610fa290cc63297a7e6b8c4d129007123aa1290b349071cba8100f918237b',
-    type: 'installer',
-    description: 'macOS universal application disk image with native Metal acceleration.',
-    recommended: true
+    "id": "cli-linux-x64",
+    "name": "Rocket 3.0.0 SDK (linux-x64)",
+    "filename": "rocket-3.0.0-linux-x64.tar.xz",
+    "platform": "linux",
+    "architecture": "linux-x64",
+    "size": "540.1 MiB",
+    "sha256": "1a716073f2941d7d4c63d25687a542d65164cafd24aba299e2b9880a615ad0fc",
+    "type": "toolchain",
+    "description": "Native compiler (rocketc), language server, standard library, and toolchain. Extract the complete SDK; follow PACKAGE.md for setup.",
+    "recommended": true
   },
   {
-    id: 'ide-mac-pkg',
-    name: 'RocketIDE macOS Installer Package',
-    filename: 'RocketIDE-macOS.pkg',
-    platform: 'macos',
-    architecture: 'Apple Silicon & Intel Universal',
-    size: '87.2 MB',
-    sha256: 'f560e90c63297a7e6b8c4d129007123aa1290b349071cba8100f918237b8b761',
-    type: 'installer',
-    description: 'Standard macOS installer package (.pkg) for automated system setup and CLI registration.',
-    recommended: false
-  },
-  // Toolchain
-  {
-    id: 'cli-compiler-win',
-    name: 'Rocket Compiler Toolchain (Windows)',
-    filename: 'rocket-sdk-win-x64.zip',
-    platform: 'windows',
-    architecture: 'Windows x64',
-    size: '28.5 MB',
-    sha256: 'd198ea4390b1c416e87f62d1947b198129038201a084617cf90b23b10b037748',
-    type: 'toolchain',
-    description: 'Compiler binary (rocketc), standard libraries (stdlib), and LLVM optimization pipeline.',
-    recommended: true
+    "id": "cli-linux-arm64",
+    "name": "Rocket 3.0.0 SDK (linux-arm64)",
+    "filename": "rocket-3.0.0-linux-arm64.tar.xz",
+    "platform": "linux",
+    "architecture": "linux-arm64",
+    "size": "499.5 MiB",
+    "sha256": "1db0eadfb0e592b36442e2993a8939baa5e04dd99dab7bc32737093e4a261c3e",
+    "type": "toolchain",
+    "description": "Native compiler (rocketc), language server, standard library, and toolchain. Extract the complete SDK; follow PACKAGE.md for setup.",
+    "recommended": true
   },
   {
-    id: 'cli-compiler-linux',
-    name: 'Rocket Compiler Toolchain (Linux)',
-    filename: 'rocket-sdk-linux-x86_64.tar.gz',
-    platform: 'linux',
-    architecture: 'Linux x86_64',
-    size: '26.4 MB',
-    sha256: '417bb18903c7219081a27e36618a0918cb091277a80b181290bbfa71009182ab',
-    type: 'toolchain',
-    description: 'Linux compiler binary (rocketc), static link libraries, and standard libraries.',
-    recommended: true
-  },
-  {
-    id: 'cli-compiler-mac',
-    name: 'Rocket Compiler Toolchain (macOS)',
-    filename: 'rocket-sdk-darwin-universal.tar.gz',
-    platform: 'macos',
-    architecture: 'macOS Universal',
-    size: '27.8 MB',
-    sha256: '5de2cf54909be4483c7e74105d854faa778d15e3417bb18903c7219081a27e36',
-    type: 'toolchain',
-    description: 'macOS compiler binary (rocketc), standard libraries, and Clang runtime.',
-    recommended: true
-  },
-  {
-    id: 'cli-lsp',
-    name: 'Rocket Language Server (rocket-lsp)',
-    filename: 'rocket-lsp-win-x64.exe',
-    platform: 'cli',
-    architecture: 'Cross-Platform Tool',
-    size: '11.2 MB',
-    sha256: '8b7610fa290cc63297a7e6b8c4d129007123aa1290b349071cba8100f918237b',
-    type: 'toolchain',
-    description: 'Protocol 1.0 language server providing incremental AST analysis, semantic tokens, and diagnostics.',
-    recommended: false
+    "id": "cli-macos-arm64",
+    "name": "Rocket 3.0.0 SDK (macos-arm64)",
+    "filename": "rocket-3.0.0-macos-arm64.tar.xz",
+    "platform": "macos",
+    "architecture": "Apple Silicon ARM64",
+    "size": "254.9 MiB",
+    "sha256": "96192c6fda0a479c31d3bd4e1d4da67f400912f3faa30f60abc1cd7d1102dfa7",
+    "type": "toolchain",
+    "description": "Native compiler (rocketc), language server, standard library, and toolchain. Extract the complete SDK; follow PACKAGE.md for setup.",
+    "recommended": true
   }
 ];

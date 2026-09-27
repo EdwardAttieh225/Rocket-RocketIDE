@@ -407,7 +407,7 @@ export const PageIntro: React.FC<PageIntroProps> = ({ onNavigate }) => {
           Ready to experience Rocket?
         </h3>
         <p className="text-sm text-neutral-300 max-w-lg mx-auto leading-relaxed">
-          Launch Rocket programs in the in-browser simulator or install RocketIDE for your platform.
+          Launch Rocket programs in the in-browser simulator or install RocketIDE for Windows or the Rocket SDK for your platform.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <button

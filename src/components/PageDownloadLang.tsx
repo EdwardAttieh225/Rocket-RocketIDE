@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RELEASE_ASSETS, getDownloadUrl, GITHUB_RELEASES_URL } from '../data/rocketData';
 import { 
   Download, Copy, Check, Terminal, 
-  ArrowLeft, ArrowRight, ShieldCheck, Box, Monitor, ExternalLink
+  ArrowLeft, ArrowRight, Monitor, ExternalLink
 } from 'lucide-react';
 import { AppPage } from '../App';
 
@@ -37,14 +37,7 @@ export const PageDownloadLang: React.FC<PageDownloadLangProps> = ({ onNavigate }
 
   const handleInitiateDownload = (asset: typeof toolchainAssets[0]) => {
     setDownloadingId(asset.id);
-    const directUrl = getDownloadUrl(asset.filename);
-
-    const a = document.createElement('a');
-    a.href = directUrl;
-    a.setAttribute('download', asset.filename);
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    // The anchor performs the download; this handler only shows feedback.
 
     setTimeout(() => {
       setDownloadingId(null);
@@ -72,7 +65,7 @@ export const PageDownloadLang: React.FC<PageDownloadLangProps> = ({ onNavigate }
             Download Rocket Toolchain
           </h2>
           <p className="text-xs text-neutral-400 mt-1">
-            Production compiler (<code className="text-orange-300 font-mono-code">rocketc</code>), standard libraries, and Language Server Protocol engine.
+            Rocket 3.0.0 compiler (<code className="text-orange-300 font-mono-code">rocketc</code>), standard libraries, and Language Server Protocol engine.
           </p>
         </div>
 
@@ -215,6 +208,12 @@ export const PageDownloadLang: React.FC<PageDownloadLangProps> = ({ onNavigate }
             </div>
           );
         })}
+      </div>
+
+      <div className="p-4 bg-neutral-950 border border-neutral-800 rounded-xl space-y-2 text-sm text-neutral-300">
+        <p>Extract the complete SDK and add its <code>bin</code> directory to PATH. Windows uses <code>rocketc.exe</code>; Linux and macOS use <code>rocketc</code>. Each archive includes the matching language server, libraries and package instructions.</p>
+        <p>Linux packages target x64 or ARM64 and were validated on Ubuntu 24.04. The macOS package is for Apple Silicon (ARM64), validated on macOS 14; an Intel macOS package is not available.</p>
+        <p>On macOS, install Xcode Command Line Tools with <code>xcode-select --install</code> and follow the SDK's PACKAGE.md. On Linux, follow PACKAGE.md for native system prerequisites.</p>
       </div>
 
       {/* CLI Quickstart Commands */}

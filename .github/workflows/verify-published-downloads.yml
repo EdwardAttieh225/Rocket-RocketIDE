@@ -1,0 +1,80 @@
+name: Verify published downloads
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-downloads:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Fetch every public download and verify its bytes
+        run: |
+          python3 - <<'PY'
+          import datetime, hashlib, json, urllib.request
+          expected = json.load(open('public/downloads.json'))
+          results = []
+          for asset in expected:
+              digest = hashlib.sha256(); size = 0
+              with urllib.request.urlopen(asset['url'], timeout=120) as response:
+                  assert response.status == 200
+                  for block in iter(lambda: response.read(1024 * 1024), b''):
+                      digest.update(block); size += len(block)
+              assert size == asset['size'], asset['filename']
+              assert digest.hexdigest() == asset['sha256'], asset['filename']
+              row = dict(asset, status='passed', downloaded_bytes=size,
+                         downloaded_sha256=digest.hexdigest())
+              results.append(row)
+              print(json.dumps(row), flush=True)
+          result = dict(checked_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                        authentication='none', downloads=results)
+          open('public-download-verification.json','w').write(json.dumps(result,indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-download-verification
+          path: public-download-verification.json
+  windows-identities:
+    runs-on: windows-latest
+    steps:
+      - name: Verify downloaded executable identities
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $base = 'https://github.com/RyanEid06/Rocket-RocketIDE/releases/download/v3.0.0'
+          Invoke-WebRequest "$base/RocketIDE-win-x64-1.0.0.zip" -OutFile ide.zip
+          Invoke-WebRequest "$base/rocket-3.0.0-windows-x64.zip" -OutFile sdk.zip
+          if ((Get-FileHash ide.zip).Hash -ne 'A5E1966A322EC19E391A775EF1909FEC32A51B36B3869215A0117FC24FCB174C') { throw 'IDE download differs' }
+          if ((Get-FileHash sdk.zip).Hash -ne '42BAE12625717A776DAC358D9177A01D8DD91762D4E6ED91384FC46D34E45DE7') { throw 'SDK download differs' }
+          Expand-Archive ide.zip ide
+          Expand-Archive sdk.zip sdk
+          $exe = Get-Item 'ide/RocketIDE-win-x64-1.0.0/RocketIDE.exe'
+          if ($exe.VersionInfo.ProductVersion -ne '1.0.0+f54a7b2cd72dabaa5a327b61685bf53bbe81d5d2') { throw 'IDE version differs' }
+          if ((Get-FileHash $exe.FullName).Hash -ne '2B3342F605BC35BFDB2B8561D1E54CCD43876723C5013090F9179FDE5E4403E0') { throw 'IDE executable differs' }
+          $compiler = 'sdk/rocket-3.0.0-windows-x64/bin/rocketc.exe'
+          $compilerVersion = (& $compiler --version | Out-String).Trim()
+          if ($LASTEXITCODE -ne 0 -or $compilerVersion -notmatch '3\.0\.0') { throw 'Compiler version differs' }
+          $target = (& $compiler target --verbose | Out-String).Trim()
+          if ($LASTEXITCODE -ne 0 -or $target -notmatch 'windows-x64') { throw 'Compiler target failed' }
+          $lsp = 'sdk/rocket-3.0.0-windows-x64/bin/rocket-lsp.exe'
+          $lspVersion = (& $lsp --version | Out-String).Trim()
+          if ($LASTEXITCODE -ne 0) { throw 'Language server version failed' }
+          @{
+            status = 'passed'; checked_utc = [DateTime]::UtcNow.ToString('o');
+            ide_version = $exe.VersionInfo.ProductVersion;
+            ide_exe_sha256 = (Get-FileHash $exe.FullName).Hash;
+            compiler_version = $compilerVersion; compiler_sha256 = (Get-FileHash $compiler).Hash;
+            lsp_version = $lspVersion; lsp_sha256 = (Get-FileHash $lsp).Hash;
+            target_output = $target
+          } | ConvertTo-Json | Set-Content windows-download-identities.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-download-identities
+          path: windows-download-identities.json
