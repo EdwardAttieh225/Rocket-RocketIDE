@@ -8,8 +8,8 @@ import { RealIdeScreenshot } from './RealIdeScreenshot';
 import { BenchmarkComparison } from './BenchmarkComparison';
 
 // Import image assets directly so Vite bundles them with correct relative hashes on GitHub Pages
-import codeTypesImg from '../assets/images/rocket_code_types_1790262748282.jpg';
-import codeSystemsImg from '../assets/images/rocket_code_systems_1790262761562.jpg';
+import codeTypesImg from '../assets/images/rocket-type-system.jpg';
+import codeSystemsImg from '../assets/images/rocket-systems-programming.jpg';
 import logoImg from '../assets/images/rocket_ide_logo.png';
 
 interface PageIntroProps {
