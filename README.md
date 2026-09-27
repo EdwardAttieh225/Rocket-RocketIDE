@@ -10,4 +10,6 @@ There are no Linux/macOS RocketIDE packages or Intel macOS SDK in this release. 
 
 Use Node.js 24 and npm. Run npm ci --legacy-peer-deps, npm run lint, and npm run build. The main branch deploys through .github/workflows/deploy.yml. Download URLs and display metadata live in src/data/rocketData.ts.
 
-The SDK transfer workflow verifies native CI run 36304020122 at Rocket commit 1f6ba76f16f3246095d5d573c28d825d8b9367e3 before attaching its existing packages to the draft. Published downloads are independently fetched and hashed by the verification workflow.
+This website uses one branch, main. The completed codex/wp07-downloads work is merged into main, and the temporary remote branch is retired. RocketIDE keeps its full developer source on main and its minimal app distribution on consumer in the separate RocketIDE repository.
+
+Completed one-time draft attachment workflows are retained in docs/wp07-archived-workflows as audit evidence. They are no longer active Actions workflows. Published downloads are independently fetched and hashed by the active verification workflow.
