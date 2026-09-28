@@ -146,7 +146,7 @@ export const RealIdeScreenshot: React.FC = () => {
       {/* 5. Real Status Bar */}
       <div className="bg-[#18181c] px-3 py-1 border-t border-neutral-800 flex items-center justify-between text-[10px] font-mono-code text-neutral-400 overflow-x-auto">
         <div className="flex items-center gap-3 whitespace-nowrap">
-          <span className="text-orange-400 font-semibold">Rocket SDK: rocketc 2.1.0</span>
+          <span className="text-orange-400 font-semibold">Rocket SDK: rocketc 3.0.0</span>
           <span>|</span>
           <span>LSP: online · 274 files · 2020 ms</span>
           <span>|</span>
