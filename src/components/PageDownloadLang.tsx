@@ -67,6 +67,9 @@ export const PageDownloadLang: React.FC<PageDownloadLangProps> = ({ onNavigate }
           <p className="text-xs text-neutral-400 mt-1">
             Rocket 3.0.0 compiler (<code className="text-orange-300 font-mono-code">rocketc</code>), standard libraries, and Language Server Protocol engine.
           </p>
+          <p className="text-xs text-neutral-500 mt-2">
+            Built from Rocket master <a href="https://github.com/RyanEid06/Rocket/commit/1f6ba76f16f3246095d5d573c28d825d8b9367e3" target="_blank" rel="noreferrer" className="text-orange-300 hover:underline">1f6ba76</a>. <button onClick={() => onNavigate('roadmap')} className="text-orange-300 hover:underline">See the named roadmap</button>.
+          </p>
         </div>
 
         {/* Platform Filter Tabs */}
@@ -133,7 +136,7 @@ export const PageDownloadLang: React.FC<PageDownloadLangProps> = ({ onNavigate }
                 <div className="flex items-center justify-between text-xs text-neutral-400 pb-2 border-b border-neutral-800">
                   <div className="flex items-center gap-2">
                     <span className="capitalize font-semibold text-white">
-                      {asset.platform === 'cli' ? 'Cross-Platform' : asset.platform}
+                      {asset.platform === 'cli' ? 'Cross-Platform' : asset.platform === 'macos' ? 'macOS' : asset.platform}
                     </span>
                     <span className="text-neutral-600">·</span>
                     <span className="text-neutral-400">{asset.architecture}</span>

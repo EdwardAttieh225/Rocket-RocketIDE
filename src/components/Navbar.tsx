@@ -15,7 +15,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
     { id: 'intro', label: 'Overview' },
     { id: 'try', label: 'Try Rocket' },
     { id: 'download-ide', label: 'RocketIDE' },
-    { id: 'download-lang', label: 'Rocket Language' }
+    { id: 'download-lang', label: 'Rocket Language' },
+    { id: 'roadmap', label: 'Roadmap' }
   ];
 
   const handleNav = (page: AppPage) => {
@@ -43,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           </span>
         </button>
 
-        {/* 4 Clean Navigation Tabs */}
+        {/* Navigation Tabs */}
         <nav className="hidden md:flex items-center gap-1 bg-neutral-900/50 p-1 rounded-xl border border-neutral-800/60">
           {pages.map((p) => {
             const isActive = currentPage === p.id;
